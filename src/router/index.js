@@ -6,9 +6,9 @@ Vue.use(VueRouter);
 
 export const constRoutes = [
   {
-    path: "",
-    name: "home",
-    component: layout,
+    path: "/login",
+    name: "login",
+    component: () => import('@/views/login'),
   }
 ];
 
@@ -20,7 +20,7 @@ export const asynRoutes = [
       {
         path: "/list",
         name: "list",
-        component: () => import ('@/views/order/list'),
+        component: () => import('@/views/order/list'),
       }
     ]
   }
@@ -28,6 +28,7 @@ export const asynRoutes = [
 
 
 const router = new VueRouter({
+  mode: "history",
   routes: constRoutes,
 });
 

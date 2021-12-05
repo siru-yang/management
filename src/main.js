@@ -5,8 +5,8 @@ import store from "./store";
 import Element from "element-ui";
 
 import "./style/index.scss"
-import "./mock"
-// import "./test"
+// require("./mock")
+import './mock'
 
 Vue.config.productionTip = false;
 Vue.use(Element);

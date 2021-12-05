@@ -1,20 +1,21 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import user from "./modules/user"
+import getters from "./getters"
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
+  modules: {
+    user
+  },
+  getters: getters,
   state: {
     test: 1,
   },
   mutations: {
     setTestMu(state, payload) {
       state.test = payload.test;
-    },
-  },
-  getters: {
-    test(state) {
-      return state.test;
     },
   },
   actions: {
@@ -26,6 +27,5 @@ export default new Vuex.Store({
         }, 1000);
       });
     },
-  },
-  modules: {},
+  }
 });

@@ -3,8 +3,6 @@ const Mock = require('mockjs');
 const user = require('./user')
 
 const apiArray = [...user]
-console.log("user:",user)
-console.log("apiArray:",apiArray)
 
 // // 设置拦截ajax请求的相应时间
 // Mock.setup({
@@ -15,3 +13,5 @@ console.log("apiArray:",apiArray)
 apiArray.forEach((item) => {
     Mock.mock(item.url, item.type, item.response)
 })
+
+// Mock.mock('/user/login','post','token')

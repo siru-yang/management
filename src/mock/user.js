@@ -26,7 +26,7 @@ const tokens = {
   module.exports = [
     // user login
     {
-      url: '/vue-element-admin/user/login',
+      url: '/user/login',
       type: 'post',
       response: config => {
         const { username } = config.body
@@ -41,7 +41,7 @@ const tokens = {
         }
   
         return {
-          code: 20000,
+          code: 0,
           data: token
         }
       }
@@ -49,7 +49,7 @@ const tokens = {
   
     // get user info
     {
-      url: '/vue-element-admin/user/info',
+      url: '/user/info',
       type: 'get',
       response: config => {
         const { token } = config.query
@@ -64,7 +64,7 @@ const tokens = {
         }
   
         return {
-          code: 20000,
+          code: 0,
           data: info
         }
       }
@@ -72,11 +72,11 @@ const tokens = {
   
     // user logout
     {
-      url: '/vue-element-admin/user/logout',
+      url: '/user/logout',
       type: 'post',
       response: ()=> {
         return {
-          code: 20000,
+          code: 0,
           data: 'success'
         }
       }

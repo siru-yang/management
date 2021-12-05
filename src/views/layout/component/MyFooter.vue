@@ -8,7 +8,7 @@
 export default {
   data() {
     return {
-      copyright: "杨思汝 / <a href='https://gitee.com/siruyang/projects' class='href' target='_blank'>gitee</a>",
+      copyright: "杨思汝 / <a href='https://github.com/siru-yang?tab=repositories' class='href' target='_blank'>github</a>",
     };
   },
 };
