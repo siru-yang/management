@@ -20,7 +20,7 @@ service.interceptors.request.use(
 )
 
 service.interceptors.response.use(
-    response => { return response },
+    response => { return response.data },
     error => {
         console.log("err:", error)
         return Promise.reject(error)

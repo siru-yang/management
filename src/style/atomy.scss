@@ -1,0 +1,19 @@
+.flex-row {
+    display: flex;
+    flex-flow: row nowrap;
+}
+.flex-end {
+    justify-content: flex-end;
+}
+.flex-align-center{
+    align-items: center;
+}
+.cursor-pointer{
+    cursor: pointer;
+}
+.white{
+    color:white;
+}
+.mr-10{
+   margin-right: 10px; 
+}

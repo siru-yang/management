@@ -41,7 +41,6 @@
         还没有账号，现在去注册。
         <router-link :to="{path: '/signup'}">立即注册</router-link>
       </div>-->
-      {{}}
     </div>
     <my-footer></my-footer>
   </div>
@@ -70,8 +69,13 @@ export default {
   },
   methods: {
     login() {
-      login(this.loginForm).then((rsp) => {
+      const{username, password} = this.loginForm
+      login({username, password}).then((rsp) => {
         console.log("登录结果：", rsp);
+        if(rsp.code == 0){
+          this.$store.commit('SET_TOKEN',rsp.data)
+          this.$router.push("/")
+        }
       });
     },
   },

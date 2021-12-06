@@ -1,5 +1,7 @@
 <template>
-  <div class="header"></div>
+  <div class="header flex-row flex-end flex-align-center"> 
+    <div @click="logout" class="cursor-pointer white mr-10">登出</div>    
+  </div>
 </template>
 
 <style lang="scss" scoped>
@@ -9,3 +11,15 @@
   background: #242839;
 }
 </style>
+
+<script>
+export default {
+  methods:{
+    logout(){
+      this.$store.commit('REMOVE_TOKEN')
+      console.log("登出后的token：",this.$store.getters.token)
+      // this.
+    }
+  }
+}
+</script>
