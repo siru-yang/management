@@ -17,8 +17,10 @@ export default {
   methods:{
     logout(){
       this.$store.commit('REMOVE_TOKEN')
+      this.$store.commit('SET_ROLES',[])
       console.log("登出后的token：",this.$store.getters.token)
-      // this.
+      console.log("登出后的roles：",this.$store.getters.roles)
+      this.$router.push({path: '/login'})
     }
   }
 }

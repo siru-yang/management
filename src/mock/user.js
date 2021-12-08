@@ -29,7 +29,6 @@ module.exports = [
     url: '/user/login',
     type: 'post',
     response: config => {
-      console.log("config:", config)
       const { username } = JSON.parse(config.body)
       const token = tokens[username]
 

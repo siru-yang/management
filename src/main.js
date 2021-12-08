@@ -5,6 +5,7 @@ import store from "./store";
 import Element from "element-ui";
 
 import "./style/index.scss"
+import "./permission"
 // require("./mock")
 import './mock'
 

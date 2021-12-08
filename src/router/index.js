@@ -27,7 +27,13 @@ export const asynRoutes = [
         name: "list",
         component: () => import('@/views/order/list'),
       }
-    ]
+    ],
+    meta: { roles: ['admin'] }
+  },
+  {
+    path: "/customer",
+    component: layout,
+    meta: { roles: ['editor'] }
   }
 ]
 

@@ -49,7 +49,6 @@
 
 <script>
 import MyFooter from "../layout/component/MyFooter.vue";
-import { login } from "@/api/user";
 export default {
   components: { MyFooter },
   data() {
@@ -61,21 +60,12 @@ export default {
       loading: false,
     };
   },
-  mounted() {
-    console.log("this.$store.state.user.token:", this.$store.state.user.token);
-    console.log("this.$store.getters.token:", this.$store.getters.token);
-    this.$store.commit("SET_TOKEN", "new token");
-    console.log("this.$store.getters.token:", this.$store.getters.token);
-  },
+  mounted() {},
   methods: {
     login() {
-      const{username, password} = this.loginForm
-      login({username, password}).then((rsp) => {
-        console.log("登录结果：", rsp);
-        if(rsp.code == 0){
-          this.$store.commit('SET_TOKEN',rsp.data)
-          this.$router.push("/")
-        }
+      this.$store.dispatch("login", this.loginForm).then(() => {
+        this.$router.push({ path: "/" });
+        console.log(this.$store.getters.token)
       });
     },
   },
