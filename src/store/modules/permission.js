@@ -1,9 +1,9 @@
 import { constRoutes, asynRoutes } from "../../router"
 
 function hasPermission(route, roles) {
-    if(route.meta && route.meta.roles){
+    if (route.meta && route.meta.roles) {
         return roles.some(role => route.meta.roles.includes(role))
-    }else{
+    } else {
         return true
     }
 }
@@ -11,9 +11,9 @@ function hasPermission(route, roles) {
 function filterAsynRoutes(routes, roles) {
     let accessedRoutes = []
     routes.forEach(route => {
-        let tmp = {...route}
-        if(hasPermission(tmp, roles)){
-            if(tmp.children){
+        let tmp = { ...route }
+        if (hasPermission(tmp, roles)) {
+            if (tmp.children) {
                 tmp.children = filterAsynRoutes(tmp.children, roles)
             }
             accessedRoutes.push(tmp)
@@ -31,9 +31,10 @@ const permission = {
             state.routes = constRoutes.concat(routes)
         }
     },
-    action: {
-        generatRoutes({ commit }, roles) {
-            new Promise(resolve => {
+    actions: {
+        generateRoutes({ commit }, roles) {
+            console.log("生成路由")
+            return new Promise(resolve => {
                 let routes = filterAsynRoutes(asynRoutes, roles)
                 commit('SET_ROUTES', routes)
                 resolve(routes)

@@ -1,6 +1,5 @@
 import { getToken, setToken, removeToken } from "../../utils/auth"
-import { getRoles } from "../../api/roles"
-import { login } from "@/api/user";
+import { login, getInfo } from "@/api/user";
 
 const user = {
     state: {
@@ -20,10 +19,11 @@ const user = {
         }
     },
     actions: {
-        login({ state,commit }, data) {
+        login({ state, commit }, data) {
             return new Promise((resolve, reject) => {
                 login(data).then((rsp) => {
                     if (rsp.code == 0) {
+                        console.log("登录返回：", rsp)
                         commit('SET_TOKEN', rsp.data)
                         setToken(rsp.data)
                         console.log("登录后设置token：", getToken(), state.token)
@@ -36,14 +36,19 @@ const user = {
 
         },
         getRoles({ state, commit }) {
-            return new Promise(resolve => {
-                getRoles(state.token).then(rsp => {
+            return new Promise((resolve, reject) => {
+                console.log("state.token:", state.token)
+                getInfo(state.token).then(rsp => {
                     console.log("getRoles:", rsp)
-                    if (rsp.data.roles && rsp.data.roles.length > 0) {
-                        commit('SET_TOKEN', rsp.roles)
+                    if (!rsp.data) {
+                        reject("未登录")
                     }
+                    if (rsp.data.roles && rsp.data.roles.length < 0) {
+                        reject("roles无效")
+                    }
+                    commit('SET_ROLES', rsp.data.roles)
                     resolve(rsp.data.roles)
-                })
+                }).catch((error) => { reject(error) })
             })
         }
     },

@@ -65,7 +65,6 @@ export default {
     login() {
       this.$store.dispatch("login", this.loginForm).then(() => {
         this.$router.push({ path: "/" });
-        console.log(this.$store.getters.token)
       });
     },
   },

@@ -30,7 +30,7 @@ module.exports = [
     type: 'post',
     response: config => {
       const { username } = JSON.parse(config.body)
-      const token = tokens[username]
+      const { token } = tokens[username]
 
       // mock error
       if (!token) {
@@ -50,11 +50,15 @@ module.exports = [
   // get user info
   {
     url: '/user/info',
-    type: 'get',
-    response: config => {
-      const { token } = config.query
+    type: 'post',
+    response: (config) => {
+      const { token } = JSON.parse(config.body)
       const info = users[token]
 
+      // return {
+      //   code: 0,
+      //   data: users['admin-token']
+      // }
       // mock error
       if (!info) {
         return {
