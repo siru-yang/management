@@ -33,7 +33,6 @@ const permission = {
     },
     actions: {
         generateRoutes({ commit }, roles) {
-            console.log("生成路由")
             return new Promise(resolve => {
                 let routes = filterAsynRoutes(asynRoutes, roles)
                 commit('SET_ROUTES', routes)

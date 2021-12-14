@@ -19,14 +19,12 @@ const user = {
         }
     },
     actions: {
-        login({ state, commit }, data) {
+        login({ commit }, data) {
             return new Promise((resolve, reject) => {
                 login(data).then((rsp) => {
                     if (rsp.code == 0) {
-                        console.log("登录返回：", rsp)
                         commit('SET_TOKEN', rsp.data)
                         setToken(rsp.data)
-                        console.log("登录后设置token：", getToken(), state.token)
                         resolve()
                     }
                 }).catch((error) => {
@@ -35,20 +33,30 @@ const user = {
             })
 
         },
-        getRoles({ state, commit }) {
+        getInfo({ state, commit }) {
             return new Promise((resolve, reject) => {
-                console.log("state.token:", state.token)
                 getInfo(state.token).then(rsp => {
-                    console.log("getRoles:", rsp)
                     if (!rsp.data) {
                         reject("未登录")
                     }
-                    if (rsp.data.roles && rsp.data.roles.length < 0) {
+                    else if (rsp.data.roles && rsp.data.roles.length <= 0) {
                         reject("roles无效")
                     }
-                    commit('SET_ROLES', rsp.data.roles)
-                    resolve(rsp.data.roles)
-                }).catch((error) => { reject(error) })
+                    else if (rsp.data.roles && rsp.data.roles.length > 0) {
+                        commit('SET_ROLES', rsp.data.roles)
+                        resolve(rsp.data.roles)
+                    }
+                }).catch(error => {
+                    reject(error)
+                })
+            })
+        },
+        removeToken({ commit }) {
+            return new Promise(resolve => {
+                commit('SET_TOKEN', "")
+                commit('SET_ROLES', [])
+                removeToken()
+                resolve()
             })
         }
     },
