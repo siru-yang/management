@@ -1,5 +1,5 @@
 import axios from 'axios'
-import store from '@/store'
+import { getToken } from './auth'
 
 const service = axios.create({
     baseURL: process.env.VUE_APP_BASE_URL,
@@ -8,7 +8,7 @@ const service = axios.create({
 
 service.interceptors.request.use(
     config => {
-        if (store.getters.token) {
+        if (getToken()) {
             console.log("有token，在请求头中加入token")
         }
         return config
